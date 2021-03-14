@@ -43975,12 +43975,12 @@ exports.CreateMcWorld = void 0;
 const fs_1 = __nccwpck_require__(5747);
 const path_1 = __importDefault(__nccwpck_require__(5622));
 const Functions_1 = __nccwpck_require__(6344);
-const archiver = __nccwpck_require__(5780);
+const archiver_1 = __importDefault(__nccwpck_require__(5780));
 function CreateMcWorld(Context) {
     let filepath = Functions_1.GetSafeFilepath(path_1.default.join(Context.Folder, ".."), "world", "mcworld");
     console.log("Writing: " + filepath);
     const output = fs_1.createWriteStream(filepath);
-    const archive = archiver("zip", { zlib: { level: 9 } });
+    const archive = archiver_1.default("zip", { zlib: { level: 9 } });
     output.on("close", () => {
         console.log("Done writing file: " + filepath);
     });
@@ -43998,7 +43998,7 @@ function CreateMcWorld(Context) {
     });
     archive.pipe(output);
     archive.directory(Context.Folder, false);
-    archive.finialize();
+    archive.finalize();
     return filepath;
 }
 exports.CreateMcWorld = CreateMcWorld;
@@ -44159,9 +44159,13 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CollectFiles = void 0;
 const fg = __importStar(__nccwpck_require__(1525));
+const path_1 = __importDefault(__nccwpck_require__(5622));
 function CollectFiles(folder, pattern) {
     let dirs = createPattern(folder, pattern);
     return fg.sync(dirs, { absolute: true, onlyFiles: true });
@@ -44172,11 +44176,11 @@ function createPattern(folder, pattern) {
     if (Array.isArray(pattern)) {
         for (let I = 0; I < pattern.length; I++) {
             const entry = pattern[I];
-            out.push(folder + entry);
+            out.push(path_1.default.join(folder, entry));
         }
     }
     else {
-        out.push(folder + pattern);
+        out.push(path_1.default.join(folder, pattern));
     }
     return out;
 }
