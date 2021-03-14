@@ -1920,7 +1920,7 @@ var Stream = __nccwpck_require__(2141);
 
 /*<replacement>*/
 
-var Buffer = __nccwpck_require__(6513).Buffer;
+var Buffer = __nccwpck_require__(1944).Buffer;
 var OurUint8Array = global.Uint8Array || function () {};
 function _uint8ArrayToBuffer(chunk) {
   return Buffer.from(chunk);
@@ -3195,7 +3195,7 @@ var Stream = __nccwpck_require__(2141);
 
 /*<replacement>*/
 
-var Buffer = __nccwpck_require__(6513).Buffer;
+var Buffer = __nccwpck_require__(1944).Buffer;
 var OurUint8Array = global.Uint8Array || function () {};
 function _uint8ArrayToBuffer(chunk) {
   return Buffer.from(chunk);
@@ -3811,7 +3811,7 @@ Writable.prototype._destroy = function (err, cb) {
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Buffer = __nccwpck_require__(6513).Buffer;
+var Buffer = __nccwpck_require__(1944).Buffer;
 var util = __nccwpck_require__(1669);
 
 function copyBuffer(src, target, offset) {
@@ -4004,75 +4004,6 @@ if (process.env.READABLE_STREAM === 'disable' && Stream) {
 
 /***/ }),
 
-/***/ 6513:
-/***/ ((module, exports, __nccwpck_require__) => {
-
-/* eslint-disable node/no-deprecated-api */
-var buffer = __nccwpck_require__(4293)
-var Buffer = buffer.Buffer
-
-// alternative to using Object.keys for old browsers
-function copyProps (src, dst) {
-  for (var key in src) {
-    dst[key] = src[key]
-  }
-}
-if (Buffer.from && Buffer.alloc && Buffer.allocUnsafe && Buffer.allocUnsafeSlow) {
-  module.exports = buffer
-} else {
-  // Copy properties from require('buffer')
-  copyProps(buffer, exports)
-  exports.Buffer = SafeBuffer
-}
-
-function SafeBuffer (arg, encodingOrOffset, length) {
-  return Buffer(arg, encodingOrOffset, length)
-}
-
-// Copy static methods from Buffer
-copyProps(Buffer, SafeBuffer)
-
-SafeBuffer.from = function (arg, encodingOrOffset, length) {
-  if (typeof arg === 'number') {
-    throw new TypeError('Argument must not be a number')
-  }
-  return Buffer(arg, encodingOrOffset, length)
-}
-
-SafeBuffer.alloc = function (size, fill, encoding) {
-  if (typeof size !== 'number') {
-    throw new TypeError('Argument must be a number')
-  }
-  var buf = Buffer(size)
-  if (fill !== undefined) {
-    if (typeof encoding === 'string') {
-      buf.fill(fill, encoding)
-    } else {
-      buf.fill(fill)
-    }
-  } else {
-    buf.fill(0)
-  }
-  return buf
-}
-
-SafeBuffer.allocUnsafe = function (size) {
-  if (typeof size !== 'number') {
-    throw new TypeError('Argument must be a number')
-  }
-  return Buffer(size)
-}
-
-SafeBuffer.allocUnsafeSlow = function (size) {
-  if (typeof size !== 'number') {
-    throw new TypeError('Argument must be a number')
-  }
-  return buffer.SlowBuffer(size)
-}
-
-
-/***/ }),
-
 /***/ 6043:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
@@ -4102,7 +4033,7 @@ SafeBuffer.allocUnsafeSlow = function (size) {
 
 /*<replacement>*/
 
-var Buffer = __nccwpck_require__(6513).Buffer;
+var Buffer = __nccwpck_require__(1944).Buffer;
 /*</replacement>*/
 
 var isEncoding = Buffer.isEncoding || function (encoding) {
@@ -28683,7 +28614,7 @@ var Stream = __nccwpck_require__(6990);
 
 /*<replacement>*/
 
-var Buffer = __nccwpck_require__(8387).Buffer;
+var Buffer = __nccwpck_require__(1944).Buffer;
 var OurUint8Array = global.Uint8Array || function () {};
 function _uint8ArrayToBuffer(chunk) {
   return Buffer.from(chunk);
@@ -29958,7 +29889,7 @@ var Stream = __nccwpck_require__(6990);
 
 /*<replacement>*/
 
-var Buffer = __nccwpck_require__(8387).Buffer;
+var Buffer = __nccwpck_require__(1944).Buffer;
 var OurUint8Array = global.Uint8Array || function () {};
 function _uint8ArrayToBuffer(chunk) {
   return Buffer.from(chunk);
@@ -30574,7 +30505,7 @@ Writable.prototype._destroy = function (err, cb) {
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Buffer = __nccwpck_require__(8387).Buffer;
+var Buffer = __nccwpck_require__(1944).Buffer;
 var util = __nccwpck_require__(1669);
 
 function copyBuffer(src, target, offset) {
@@ -30775,75 +30706,6 @@ if (process.env.READABLE_STREAM === 'disable' && Stream) {
 
 /***/ }),
 
-/***/ 8387:
-/***/ ((module, exports, __nccwpck_require__) => {
-
-/* eslint-disable node/no-deprecated-api */
-var buffer = __nccwpck_require__(4293)
-var Buffer = buffer.Buffer
-
-// alternative to using Object.keys for old browsers
-function copyProps (src, dst) {
-  for (var key in src) {
-    dst[key] = src[key]
-  }
-}
-if (Buffer.from && Buffer.alloc && Buffer.allocUnsafe && Buffer.allocUnsafeSlow) {
-  module.exports = buffer
-} else {
-  // Copy properties from require('buffer')
-  copyProps(buffer, exports)
-  exports.Buffer = SafeBuffer
-}
-
-function SafeBuffer (arg, encodingOrOffset, length) {
-  return Buffer(arg, encodingOrOffset, length)
-}
-
-// Copy static methods from Buffer
-copyProps(Buffer, SafeBuffer)
-
-SafeBuffer.from = function (arg, encodingOrOffset, length) {
-  if (typeof arg === 'number') {
-    throw new TypeError('Argument must not be a number')
-  }
-  return Buffer(arg, encodingOrOffset, length)
-}
-
-SafeBuffer.alloc = function (size, fill, encoding) {
-  if (typeof size !== 'number') {
-    throw new TypeError('Argument must be a number')
-  }
-  var buf = Buffer(size)
-  if (fill !== undefined) {
-    if (typeof encoding === 'string') {
-      buf.fill(fill, encoding)
-    } else {
-      buf.fill(fill)
-    }
-  } else {
-    buf.fill(0)
-  }
-  return buf
-}
-
-SafeBuffer.allocUnsafe = function (size) {
-  if (typeof size !== 'number') {
-    throw new TypeError('Argument must be a number')
-  }
-  return Buffer(size)
-}
-
-SafeBuffer.allocUnsafeSlow = function (size) {
-  if (typeof size !== 'number') {
-    throw new TypeError('Argument must be a number')
-  }
-  return buffer.SlowBuffer(size)
-}
-
-
-/***/ }),
-
 /***/ 496:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
@@ -30873,7 +30735,7 @@ SafeBuffer.allocUnsafeSlow = function (size) {
 
 /*<replacement>*/
 
-var Buffer = __nccwpck_require__(8387).Buffer;
+var Buffer = __nccwpck_require__(1944).Buffer;
 /*</replacement>*/
 
 var isEncoding = Buffer.isEncoding || function (encoding) {
@@ -42210,7 +42072,6 @@ function runParallel (tasks, cb) {
 /***/ 1944:
 /***/ ((module, exports, __nccwpck_require__) => {
 
-/*! safe-buffer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
 /* eslint-disable node/no-deprecated-api */
 var buffer = __nccwpck_require__(4293)
 var Buffer = buffer.Buffer
@@ -42232,8 +42093,6 @@ if (Buffer.from && Buffer.alloc && Buffer.allocUnsafe && Buffer.allocUnsafeSlow)
 function SafeBuffer (arg, encodingOrOffset, length) {
   return Buffer(arg, encodingOrOffset, length)
 }
-
-SafeBuffer.prototype = Object.create(Buffer.prototype)
 
 // Copy static methods from Buffer
 copyProps(Buffer, SafeBuffer)
@@ -42308,7 +42167,7 @@ SafeBuffer.allocUnsafeSlow = function (size) {
 
 /*<replacement>*/
 
-var Buffer = __nccwpck_require__(1944).Buffer;
+var Buffer = __nccwpck_require__(7657).Buffer;
 /*</replacement>*/
 
 var isEncoding = Buffer.isEncoding || function (encoding) {
@@ -42579,6 +42438,78 @@ function simpleWrite(buf) {
 function simpleEnd(buf) {
   return buf && buf.length ? this.write(buf) : '';
 }
+
+/***/ }),
+
+/***/ 7657:
+/***/ ((module, exports, __nccwpck_require__) => {
+
+/*! safe-buffer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
+/* eslint-disable node/no-deprecated-api */
+var buffer = __nccwpck_require__(4293)
+var Buffer = buffer.Buffer
+
+// alternative to using Object.keys for old browsers
+function copyProps (src, dst) {
+  for (var key in src) {
+    dst[key] = src[key]
+  }
+}
+if (Buffer.from && Buffer.alloc && Buffer.allocUnsafe && Buffer.allocUnsafeSlow) {
+  module.exports = buffer
+} else {
+  // Copy properties from require('buffer')
+  copyProps(buffer, exports)
+  exports.Buffer = SafeBuffer
+}
+
+function SafeBuffer (arg, encodingOrOffset, length) {
+  return Buffer(arg, encodingOrOffset, length)
+}
+
+SafeBuffer.prototype = Object.create(Buffer.prototype)
+
+// Copy static methods from Buffer
+copyProps(Buffer, SafeBuffer)
+
+SafeBuffer.from = function (arg, encodingOrOffset, length) {
+  if (typeof arg === 'number') {
+    throw new TypeError('Argument must not be a number')
+  }
+  return Buffer(arg, encodingOrOffset, length)
+}
+
+SafeBuffer.alloc = function (size, fill, encoding) {
+  if (typeof size !== 'number') {
+    throw new TypeError('Argument must be a number')
+  }
+  var buf = Buffer(size)
+  if (fill !== undefined) {
+    if (typeof encoding === 'string') {
+      buf.fill(fill, encoding)
+    } else {
+      buf.fill(fill)
+    }
+  } else {
+    buf.fill(0)
+  }
+  return buf
+}
+
+SafeBuffer.allocUnsafe = function (size) {
+  if (typeof size !== 'number') {
+    throw new TypeError('Argument must be a number')
+  }
+  return Buffer(size)
+}
+
+SafeBuffer.allocUnsafeSlow = function (size) {
+  if (typeof size !== 'number') {
+    throw new TypeError('Argument must be a number')
+  }
+  return buffer.SlowBuffer(size)
+}
+
 
 /***/ }),
 
@@ -43962,7 +43893,7 @@ ZipStream.prototype.finalize = function() {
 
 /***/ }),
 
-/***/ 3860:
+/***/ 6317:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -43993,7 +43924,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CreateMcWorld = void 0;
 const fs = __importStar(__nccwpck_require__(5747));
 const path_1 = __importDefault(__nccwpck_require__(5622));
-const Functions_1 = __nccwpck_require__(6344);
+const Functions_1 = __nccwpck_require__(4280);
 const archiver_1 = __importDefault(__nccwpck_require__(5780));
 function CreateMcWorld(Context) {
     let filepath = Functions_1.GetSafeFilepath(path_1.default.join(Context.Folder, ".."), "world", "mcworld");
@@ -44025,7 +43956,7 @@ exports.CreateMcWorld = CreateMcWorld;
 
 /***/ }),
 
-/***/ 9616:
+/***/ 9122:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -44050,10 +43981,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.TrimFiles = void 0;
+exports.ShouldRemove = exports.TrimFiles = void 0;
 const fs = __importStar(__nccwpck_require__(5747));
-const Collect_1 = __nccwpck_require__(6815);
-const FileInfo_1 = __nccwpck_require__(6668);
+const Collect_1 = __nccwpck_require__(526);
+const FileInfo_1 = __nccwpck_require__(4638);
 function TrimFiles(Context) {
     console.log("Trimming files");
     let files = Collect_1.CollectFiles(Context.Folder, "**/*");
@@ -44077,7 +44008,7 @@ function ShouldRemove(filepath) {
         case "jpg":
         case "js":
         case "jsonc":
-        case "jsonc":
+        case "json":
         case "lang":
         case "ldb":
         case "log":
@@ -44097,11 +44028,12 @@ function ShouldRemove(filepath) {
     //Possible blacklisted filename / others
     return false;
 }
+exports.ShouldRemove = ShouldRemove;
 //# sourceMappingURL=Trimming.js.map
 
 /***/ }),
 
-/***/ 1852:
+/***/ 7001:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -44127,7 +44059,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ProcessFile = exports.JsonProcessing = void 0;
-const Collect_1 = __nccwpck_require__(6815);
+const Collect_1 = __nccwpck_require__(526);
 const JSONC = __importStar(__nccwpck_require__(5862));
 const fs = __importStar(__nccwpck_require__(5747));
 function JsonProcessing(Context) {
@@ -44154,7 +44086,7 @@ exports.ProcessFile = ProcessFile;
 
 /***/ }),
 
-/***/ 6815:
+/***/ 526:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -44207,7 +44139,7 @@ function createPattern(folder, pattern) {
 
 /***/ }),
 
-/***/ 6668:
+/***/ 4638:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -44241,7 +44173,7 @@ exports.FileInfo = FileInfo;
 
 /***/ }),
 
-/***/ 6344:
+/***/ 4280:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -44292,16 +44224,16 @@ exports.GetSafeFilepath = GetSafeFilepath;
 
 /***/ }),
 
-/***/ 3915:
+/***/ 6437:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Package = void 0;
-const CreateMcWorld_1 = __nccwpck_require__(3860);
-const Trimming_1 = __nccwpck_require__(9616);
-const Processing_1 = __nccwpck_require__(1852);
+const CreateMcWorld_1 = __nccwpck_require__(6317);
+const Trimming_1 = __nccwpck_require__(9122);
+const Processing_1 = __nccwpck_require__(7001);
 function Package(Context) {
     if (Context.ProcessJson) {
         Processing_1.JsonProcessing(Context);
@@ -44317,7 +44249,7 @@ exports.Package = Package;
 
 /***/ }),
 
-/***/ 2216:
+/***/ 358:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -44343,8 +44275,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const fs = __importStar(__nccwpck_require__(5747));
-const Package_1 = __nccwpck_require__(3915);
-const PackageContext_1 = __nccwpck_require__(7773);
+const Package_1 = __nccwpck_require__(6437);
+const PackageContext_1 = __nccwpck_require__(2365);
 //Leave this be
 const corexp = __nccwpck_require__(5227);
 //Start code
@@ -44389,7 +44321,7 @@ catch (error) {
 
 /***/ }),
 
-/***/ 7773:
+/***/ 2365:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -44534,6 +44466,6 @@ module.exports = require("zlib");;
 /******/ 	// module exports must be returned from runtime so entry inlining is disabled
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	return __nccwpck_require__(2216);
+/******/ 	return __nccwpck_require__(358);
 /******/ })()
 ;
