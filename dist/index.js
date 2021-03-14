@@ -43926,7 +43926,7 @@ const fs = __importStar(__nccwpck_require__(5747));
 const path_1 = __importDefault(__nccwpck_require__(5622));
 const Functions_1 = __nccwpck_require__(4280);
 const archiver_1 = __importDefault(__nccwpck_require__(5780));
-function CreateMcWorld(Context) {
+async function CreateMcWorld(Context) {
     let filepath = Functions_1.GetSafeFilepath(path_1.default.join(Context.Folder, ".."), "world", "mcworld");
     console.log("Writing: " + filepath);
     const output = fs.createWriteStream(filepath);
@@ -43948,7 +43948,7 @@ function CreateMcWorld(Context) {
     });
     archive.pipe(output);
     archive.directory(Context.Folder, false);
-    archive.finalize();
+    await archive.finalize();
     return filepath;
 }
 exports.CreateMcWorld = CreateMcWorld;
@@ -44234,15 +44234,14 @@ exports.Package = void 0;
 const CreateMcWorld_1 = __nccwpck_require__(6317);
 const Trimming_1 = __nccwpck_require__(9122);
 const Processing_1 = __nccwpck_require__(7001);
-function Package(Context) {
+async function Package(Context) {
     if (Context.ProcessJson) {
         Processing_1.JsonProcessing(Context);
     }
     if (Context.TrimFiles) {
         Trimming_1.TrimFiles(Context);
     }
-    let WorldFilepath = CreateMcWorld_1.CreateMcWorld(Context);
-    return WorldFilepath;
+    return CreateMcWorld_1.CreateMcWorld(Context);
 }
 exports.Package = Package;
 //# sourceMappingURL=Package.js.map
@@ -44287,21 +44286,20 @@ try {
     Context.ProcessJson = corexp.getInput("processJson") === "true";
     Context.TrimFiles = corexp.getInput("trimFiles") === "true";
     console.log("starting on: " + Context.Folder);
-    let filepath = "";
     if (fs.existsSync(Context.Folder)) {
-        filepath = Package_1.Package(Context);
+        let result = Package_1.Package(Context);
+        result.then((filepath) => {
+            corexp.setOutput("worldFilepath", filepath);
+            console.log("created: " + filepath);
+            process.exit(0);
+        });
+        result.catch((err) => {
+            console.log("failed to create world");
+            process.exit(1);
+        });
     }
     else {
         throw { message: "Couldnt not find folder: " + Context.Folder };
-    }
-    corexp.setOutput("worldFilepath", filepath);
-    if (filepath !== "" && fs.existsSync(filepath)) {
-        console.log("created: " + filepath);
-        process.exit(0);
-    }
-    else {
-        console.log("failed to create world");
-        process.exit(1);
     }
 }
 catch (error) {
