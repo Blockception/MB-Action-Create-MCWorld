@@ -1,6 +1,6 @@
 lib
 node_modules/
-out/
+out/tests
 client/server
 .vscode-test
 *.vsix

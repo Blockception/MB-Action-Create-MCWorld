@@ -14,7 +14,7 @@ try {
   Context.TrimFiles = corexp.getInput("trimFiles") === "true";
 
   if (fs.existsSync(Context.Folder)) {
-    await Process(Context);
+    const temp = await Process(Context);
   } else {
     throw { message: "Couldnt not find folder: " + Context.Folder };
   }
@@ -43,3 +43,5 @@ async function Process(Context: PackageContext) {
     process.exit(1);
   }
 }
+
+export {};
