@@ -18,7 +18,7 @@ export function TrimFiles(Context: PackageContext): void {
   }
 }
 
-function ShouldRemove(filepath: string): boolean {
+export function ShouldRemove(filepath: string): boolean {
   let Info = new FileInfo(filepath);
 
   //Check extension first
