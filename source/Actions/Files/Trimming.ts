@@ -30,7 +30,7 @@ export function ShouldRemove(filepath: string): boolean {
     case "jpg":
     case "js":
     case "jsonc":
-    case "jsonc":
+    case "json":
     case "lang":
     case "ldb":
     case "log":
