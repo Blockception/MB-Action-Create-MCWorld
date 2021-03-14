@@ -2,7 +2,7 @@
   "name": "mb-action-create-mcworld",
   "version": "1.0.0",
   "description": "The github action that will create a mcworld in a given respository",
-  "main": "dist/action.js",
+  "main": "out/action.js",
   "scripts": {
     "build": "tsc && ncc build",
     "watch": "tsc -w",

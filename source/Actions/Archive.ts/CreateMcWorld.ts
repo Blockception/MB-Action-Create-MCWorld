@@ -1,5 +1,5 @@
-import { createWriteStream } from "node:fs";
-import path from "node:path";
+import { createWriteStream } from "fs";
+import path from "path";
 import { GetSafeFilepath } from "../../Files/Functions";
 import { PackageContext } from "../../types/PackageContext";
 
