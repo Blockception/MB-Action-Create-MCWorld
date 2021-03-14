@@ -1,0 +1,39 @@
+{
+  "name": "mb-action-create-mcworld",
+  "version": "1.0.0",
+  "description": "The github action that will create a mcworld in a given respository",
+  "main": "out/action.js",
+  "scripts": {
+    "build": "tsc && ncc build",
+    "watch": "tsc -w",
+    "test": "exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Blockception/MB-Action-Create-MCWorld.git"
+  },
+  "keywords": [
+    "Github",
+    "action",
+    "github-action",
+    "Minecraft",
+    "bedrock",
+    "mcworld",
+    "zip"
+  ],
+  "author": "Blockception Ltd",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/Blockception/MB-Action-Create-MCWorld/issues"
+  },
+  "homepage": "https://github.com/Blockception/MB-Action-Create-MCWorld#readme",
+  "devDependencies": {
+    "@types/node": "^14.14.34",
+    "typescript": "^4.2.3"
+  },
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "comment-json": "^4.1.0",
+    "fast-glob": "^3.2.5"
+  }
+}

@@ -1,0 +1,23 @@
+name: 'Minecraft Bedrock Action: Create MCWorld'
+description: 'Creates includes.ts for a typescript project'
+branding:
+  icon: activity
+  color: blue
+inputs:
+  folder:
+    description: The folder path to start at
+    required: true
+  processJson:
+    description: Whether or not to format json and minify json
+    required: false
+    default: true
+  trimFiles:
+    description: Whether or not to remove unwanted files
+    required: false
+    default: true
+outputs:
+  worldFilepath:
+    description: 'The outputted mcworld filepath'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
