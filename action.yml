@@ -20,4 +20,4 @@ outputs:
     description: 'The outputted mcworld filepath'
 runs:
   using: 'node12'
-  main: 'dist/index.js'
+  main: 'out/source/index.js'
