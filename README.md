@@ -1,11 +1,17 @@
 # Minecraft Bedrock Action: Create MCWorld
 
 - [Minecraft Bedrock Action: Create MCWorld](#minecraft-bedrock-action-create-mcworld)
-	- [Inputs](#inputs)
-	- [Outputs](#outputs)
-	- [Example usage](#example-usage)
+  - [Actions](#actions)
+  - [Inputs](#inputs)
+  - [Outputs](#outputs)
+  - [Example usage](#example-usage)
 
-The github action that will create a mcworld in a given respository
+The github action that will create a mcworld in a given respository and performs configurable actions on the world:
+
+## Actions
+
+- Minify and removing comments from json files
+- Removing unwanted files from folders
 
 ## Inputs
 
