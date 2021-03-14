@@ -3,7 +3,7 @@ import path from "path";
 import { GetSafeFilepath } from "../../Files/Functions";
 import { PackageContext } from "../../types/PackageContext";
 
-const archiver = require("archiver");
+import archiver from "archiver";
 
 export function CreateMcWorld(Context: PackageContext): string {
   let filepath = GetSafeFilepath(path.join(Context.Folder, ".."), "world", "mcworld");
@@ -31,7 +31,7 @@ export function CreateMcWorld(Context: PackageContext): string {
 
   archive.pipe(output);
   archive.directory(Context.Folder, false);
-  archive.finialize();
+  archive.finalize();
 
   return filepath;
 }

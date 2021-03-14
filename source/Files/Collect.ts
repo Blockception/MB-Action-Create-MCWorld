@@ -1,4 +1,5 @@
 import * as fg from "fast-glob";
+import path from "path";
 
 export function CollectFiles(folder: string, pattern: string | string[]): string[] {
   let dirs = createPattern(folder, pattern);
@@ -13,10 +14,10 @@ function createPattern(folder: string, pattern: string | string[]): string[] {
     for (let I = 0; I < pattern.length; I++) {
       const entry = pattern[I];
 
-      out.push(folder + entry);
+      out.push(path.join(folder, entry));
     }
   } else {
-    out.push(folder + pattern);
+    out.push(path.join(folder, pattern));
   }
 
   return out;

@@ -5,7 +5,8 @@
     "target": "ES2020",
     "moduleResolution": "node",
     "sourceMap": true,
-    "outDir": "out"
+    "outDir": "out",
+    "strict": true
   },
   "lib": ["ES2020"]
 }
