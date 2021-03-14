@@ -13,20 +13,8 @@ try {
   Context.ProcessJson = corexp.getInput("processJson") === "true";
   Context.TrimFiles = corexp.getInput("trimFiles") === "true";
 
-  console.log("starting on: " + Context.Folder);
-
   if (fs.existsSync(Context.Folder)) {
-    let result = Package(Context);
-
-    result.then((filepath) => {
-      corexp.setOutput("worldFilepath", filepath);
-      console.log("created: " + filepath);
-      process.exit(0);
-    });
-    result.catch((err) => {
-      console.log("failed to create world");
-      process.exit(1);
-    });
+    await Process(Context);
   } else {
     throw { message: "Couldnt not find folder: " + Context.Folder };
   }
@@ -39,6 +27,19 @@ try {
   if (corexp) corexp.setFailed(message);
   else {
     console.log(message);
+    process.exit(1);
+  }
+}
+
+async function Process(Context: PackageContext) {
+  console.log("starting on: " + Context.Folder);
+  let result = await Package(Context);
+
+  if (fs.existsSync(result)) {
+    console.log("File created: " + result);
+    process.exit(0);
+  } else {
+    console.log("Creation failed: " + result);
     process.exit(1);
   }
 }
