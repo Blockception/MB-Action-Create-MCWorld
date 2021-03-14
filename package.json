@@ -4,7 +4,7 @@
   "description": "The github action that will create a mcworld in a given respository",
   "main": "out/source/action.js",
   "scripts": {
-    "build": "tsc -b",
+    "build": "tsc -b && ncc build",
     "watch": "tsc -w",
     "test": "npx jest --runInBand --detectOpenHandles --colors --verbose --reporters=default"
   },
