@@ -4,7 +4,7 @@ import { TrimFiles } from "./Actions/Files/Trimming";
 import { JsonProcessing } from "./Actions/Json/Processing";
 import { PackageContext } from "./types/PackageContext";
 
-export function Package(Context: PackageContext): string {
+export async function Package(Context: PackageContext): Promise<string> {
   if (Context.ProcessJson) {
     JsonProcessing(Context);
   }
@@ -12,7 +12,5 @@ export function Package(Context: PackageContext): string {
     TrimFiles(Context);
   }
 
-  let WorldFilepath = CreateMcWorld(Context);
-
-  return WorldFilepath;
+  return CreateMcWorld(Context);
 }

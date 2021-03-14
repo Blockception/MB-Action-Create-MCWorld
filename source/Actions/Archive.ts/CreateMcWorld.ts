@@ -5,7 +5,7 @@ import { PackageContext } from "../../types/PackageContext";
 
 import archiver from "archiver";
 
-export function CreateMcWorld(Context: PackageContext): string {
+export async function CreateMcWorld(Context: PackageContext): Promise<string> {
   let filepath = GetSafeFilepath(path.join(Context.Folder, ".."), "world", "mcworld");
   console.log("Writing: " + filepath);
 
@@ -31,7 +31,8 @@ export function CreateMcWorld(Context: PackageContext): string {
 
   archive.pipe(output);
   archive.directory(Context.Folder, false);
-  archive.finalize();
+
+  await archive.finalize();
 
   return filepath;
 }

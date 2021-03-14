@@ -14,22 +14,21 @@ try {
   Context.TrimFiles = corexp.getInput("trimFiles") === "true";
 
   console.log("starting on: " + Context.Folder);
-  let filepath = "";
 
   if (fs.existsSync(Context.Folder)) {
-    filepath = Package(Context);
+    let result = Package(Context);
+
+    result.then((filepath) => {
+      corexp.setOutput("worldFilepath", filepath);
+      console.log("created: " + filepath);
+      process.exit(0);
+    });
+    result.catch((err) => {
+      console.log("failed to create world");
+      process.exit(1);
+    });
   } else {
     throw { message: "Couldnt not find folder: " + Context.Folder };
-  }
-
-  corexp.setOutput("worldFilepath", filepath);
-
-  if (filepath !== "" && fs.existsSync(filepath)) {
-    console.log("created: " + filepath);
-    process.exit(0);
-  } else {
-    console.log("failed to create world");
-    process.exit(1);
   }
 } catch (error) {
   let message: string;
