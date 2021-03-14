@@ -3,7 +3,7 @@ import { Package } from "./Package";
 import { PackageContext } from "./types/PackageContext";
 
 //Leave this be
-const corexp = require("@actions/core");
+import corexp from "@actions/core";
 
 //Start code
 try {
@@ -34,6 +34,9 @@ try {
 function Process(Context: PackageContext) {
   console.log("starting on: " + Context.Folder);
   let result = Package(Context);
+
+  //set output
+  corexp.setOutput("worldFilepath", result);
 
   if (fs.existsSync(result)) {
     console.log("File created: " + result);
