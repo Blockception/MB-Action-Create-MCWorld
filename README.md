@@ -31,6 +31,8 @@ The outputted mcworld filepath
 
 ## Example usage
 
+See [Create-Mcworld-On-Tag](examples/Create-Mcworld-On-Tag.yml) for a workflow that creates a release for each git tag created.
+
 ```yml
 # This is a basic workflow to help you get started with Actions
 name: create-mcworld
@@ -63,29 +65,6 @@ jobs:
         with:
           # Path to the folder, assume ${{github.workspace}} leads to root of the repo
           folder: ${{github.workspace}}/world
-
-      # Creates the release page
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: automated release
-          draft: false
-          prerelease: false
-
-      # Uploads to the newly made release
-      - name: Upload Release Asset
-        id: upload-release-asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: ${{ steps.create_mcworld.outputs.worldFilepath }}
-          asset_name: world.mcworld
-          asset_content_type: application/zip
+          processJson: false
+          trimFiles: true
 ```
