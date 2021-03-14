@@ -1,4 +1,4 @@
-import { createWriteStream } from "fs";
+import * as fs from "fs";
 import path from "path";
 import { GetSafeFilepath } from "../../Files/Functions";
 import { PackageContext } from "../../types/PackageContext";
@@ -9,7 +9,7 @@ export function CreateMcWorld(Context: PackageContext): string {
   let filepath = GetSafeFilepath(path.join(Context.Folder, ".."), "world", "mcworld");
   console.log("Writing: " + filepath);
 
-  const output = createWriteStream(filepath);
+  const output = fs.createWriteStream(filepath);
   const archive = archiver("zip", { zlib: { level: 9 } });
 
   output.on("close", () => {
