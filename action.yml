@@ -1,8 +1,5 @@
 name: 'Minecraft Bedrock Action: Create MCWorld'
 description: 'Creates includes.ts for a typescript project'
-branding:
-  icon: activity
-  color: blue
 inputs:
   folder:
     description: The folder path to start at
