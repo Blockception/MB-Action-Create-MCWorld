@@ -19447,6 +19447,11 @@ exports.Package = void 0;
 const CreateMcWorld_1 = __nccwpck_require__(6317);
 const Trimming_1 = __nccwpck_require__(9122);
 const Processing_1 = __nccwpck_require__(7001);
+/**
+ * Returns the path to the mcworld
+ * @param Context
+ * @returns
+ */
 function Package(Context) {
     if (Context.ProcessJson) {
         Processing_1.JsonProcessing(Context);
@@ -19521,6 +19526,8 @@ catch (error) {
 function Process(Context) {
     console.log("starting on: " + Context.Folder);
     let result = Package_1.Package(Context);
+    //set output
+    corexp.setOutput("worldFilepath", result);
     if (fs.existsSync(result)) {
         console.log("File created: " + result);
         process.exit(0);

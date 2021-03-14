@@ -3,7 +3,7 @@ import { Package } from "./Package";
 import { PackageContext } from "./types/PackageContext";
 
 //Leave this be
-import corexp from "@actions/core";
+const corexp = require("@actions/core");
 
 //Start code
 try {
