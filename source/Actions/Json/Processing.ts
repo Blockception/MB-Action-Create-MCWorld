@@ -6,7 +6,7 @@ import * as fs from "fs";
 export function JsonProcessing(Context: PackageContext): void {
   console.log("Processing json files");
 
-  let jsonFiles = CollectFiles(Context.Folder, ["**.json", "**.jsonc"]);
+  let jsonFiles = CollectFiles(Context.Folder, ["**/*.json", "**/*.jsonc"]);
 
   for (let I = 0; I < jsonFiles.length; I++) {
     let jFile = jsonFiles[I];

@@ -44042,7 +44042,7 @@ function TrimFiles(Context) {
         let filepath = files[I];
         if (ShouldRemove(filepath)) {
             console.log("\tRemoving: " + filepath);
-            fs.rmSync(filepath);
+            fs.rmSync(filepath, { force: true, maxRetries: 1 });
         }
     }
 }
@@ -44113,7 +44113,7 @@ const JSONC = __importStar(__nccwpck_require__(5862));
 const fs = __importStar(__nccwpck_require__(5747));
 function JsonProcessing(Context) {
     console.log("Processing json files");
-    let jsonFiles = Collect_1.CollectFiles(Context.Folder, ["**.json", "**.jsonc"]);
+    let jsonFiles = Collect_1.CollectFiles(Context.Folder, ["**/*.json", "**/*.jsonc"]);
     for (let I = 0; I < jsonFiles.length; I++) {
         let jFile = jsonFiles[I];
         ProcessFile(jFile);

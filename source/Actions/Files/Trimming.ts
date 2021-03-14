@@ -12,7 +12,7 @@ export function TrimFiles(Context: PackageContext): void {
     let filepath = files[I];
     if (ShouldRemove(filepath)) {
       console.log("\tRemoving: " + filepath);
-      fs.rmSync(filepath);
+      fs.rmSync(filepath, { force: true, maxRetries: 1 });
     }
   }
 }
