@@ -14,7 +14,7 @@ try {
   Context.TrimFiles = corexp.getInput("trimFiles") === "true";
 
   if (fs.existsSync(Context.Folder)) {
-    const temp = await Process(Context);
+    Process(Context);
   } else {
     throw { message: "Couldnt not find folder: " + Context.Folder };
   }
@@ -31,9 +31,9 @@ try {
   }
 }
 
-async function Process(Context: PackageContext) {
+function Process(Context: PackageContext) {
   console.log("starting on: " + Context.Folder);
-  let result = await Package(Context);
+  let result = Package(Context);
 
   if (fs.existsSync(result)) {
     console.log("File created: " + result);
@@ -43,5 +43,3 @@ async function Process(Context: PackageContext) {
     process.exit(1);
   }
 }
-
-export {};
