@@ -43967,19 +43967,38 @@ ZipStream.prototype.finalize = function() {
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CreateMcWorld = void 0;
-const fs_1 = __nccwpck_require__(5747);
+const fs = __importStar(__nccwpck_require__(5747));
 const path_1 = __importDefault(__nccwpck_require__(5622));
 const Functions_1 = __nccwpck_require__(6344);
 const archiver_1 = __importDefault(__nccwpck_require__(5780));
 function CreateMcWorld(Context) {
     let filepath = Functions_1.GetSafeFilepath(path_1.default.join(Context.Folder, ".."), "world", "mcworld");
     console.log("Writing: " + filepath);
-    const output = fs_1.createWriteStream(filepath);
+    const output = fs.createWriteStream(filepath);
     const archive = archiver_1.default("zip", { zlib: { level: 9 } });
     output.on("close", () => {
         console.log("Done writing file: " + filepath);
