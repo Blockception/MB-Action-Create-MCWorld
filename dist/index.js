@@ -19153,11 +19153,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CreateMcWorld = void 0;
-const path_1 = __importDefault(__nccwpck_require__(5622));
-const Functions_1 = __nccwpck_require__(4280);
 const adm_zip_1 = __importDefault(__nccwpck_require__(7983));
 function CreateMcWorld(Context) {
-    let filepath = Functions_1.GetSafeFilepath(path_1.default.join(Context.Folder, ".."), "world", "mcworld");
+    let filepath = Context.OutputFile;
     console.log("Writing: " + filepath);
     let Zip = new adm_zip_1.default();
     Zip.addLocalFolder(Context.Folder);
@@ -19490,8 +19488,13 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const fs = __importStar(__nccwpck_require__(5747));
+const path_1 = __importDefault(__nccwpck_require__(5622));
+const Functions_1 = __nccwpck_require__(4280);
 const Package_1 = __nccwpck_require__(6437);
 const PackageContext_1 = __nccwpck_require__(2365);
 //Leave this be
@@ -19503,11 +19506,16 @@ try {
     Context.Folder = corexp.getInput("folder");
     Context.ProcessJson = corexp.getInput("processJson") === "true";
     Context.TrimFiles = corexp.getInput("trimFiles") === "true";
+    Context.OutputFile = corexp.getInput("OutputFile") ?? "";
+    //If Context output empty then fill it
+    if (Context.OutputFile === "") {
+        Context.OutputFile = Functions_1.GetSafeFilepath(path_1.default.join(Context.Folder, ".."), "world", "mcworld");
+    }
     if (fs.existsSync(Context.Folder)) {
         Process(Context);
     }
     else {
-        throw { message: "Couldnt not find folder: " + Context.Folder };
+        throw { message: "Couldn't not find folder: " + Context.Folder };
     }
 }
 catch (error) {
@@ -19553,6 +19561,7 @@ class PackageContext {
         this.ProcessJson = true;
         this.TrimFiles = true;
         this.Folder = "";
+        this.OutputFile = "";
     }
 }
 exports.PackageContext = PackageContext;
