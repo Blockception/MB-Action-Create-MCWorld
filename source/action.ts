@@ -14,7 +14,10 @@ try {
   Context.Folder = corexp.getInput("folder");
   Context.ProcessJson = corexp.getInput("processJson") === "true";
   Context.TrimFiles = corexp.getInput("trimFiles") === "true";
-  Context.OutputFile = corexp.getInput("outputFile") ?? "";
+
+  var OutputFile = corexp.getInput("outputFile");
+
+  Context.OutputFile = OutputFile === undefined || OutputFile === null ? "" : OutputFile;
 
   //If Context output empty then fill it
   if (Context.OutputFile === "") {
