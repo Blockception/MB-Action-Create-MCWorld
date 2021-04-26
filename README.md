@@ -24,7 +24,7 @@ Whether or not to format json and minify json, defaults to true
 **trimFiles**:  
 Whether or not to remove unwanted files, defaults to true
 
-**OutputFile**:  
+**outputFile**:  
 Defaults to the folder above the specified source folder with file name: word.mcworld, but this parameter can be overwritten.
 
 ## Outputs
