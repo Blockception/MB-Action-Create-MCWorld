@@ -1,6 +1,6 @@
-name: 'Minecraft Bedrock Action: Create MCWorld'
-description: 'Creates includes.ts for a typescript project'
-branding: 
+name: "Minecraft Bedrock Action: Create MCWorld"
+description: "The github action that will create a mcworld in a given respository"
+branding:
   icon: box
   color: green
 inputs:
@@ -17,7 +17,7 @@ inputs:
     default: true
 outputs:
   worldFilepath:
-    description: 'The outputted mcworld filepath'
+    description: "The outputted mcworld filepath"
 runs:
-  using: 'node12'
-  main: 'dist/index.js'
+  using: "node12"
+  main: "dist/index.js"
