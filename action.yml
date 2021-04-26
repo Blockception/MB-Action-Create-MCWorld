@@ -18,7 +18,7 @@ inputs:
   outputFile:
     description: Defaults to the folder above the specified source folder with file name: word.mcworld, but this parameter can be overwritten.
     required: false
-    default: 
+    default: ''
     
 outputs:
   worldFilepath:
