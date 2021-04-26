@@ -1,4 +1,6 @@
 import * as fs from "fs";
+import path from "path";
+import { GetSafeFilepath } from "./Files/Functions";
 import { Package } from "./Package";
 import { PackageContext } from "./types/PackageContext";
 
@@ -12,11 +14,17 @@ try {
   Context.Folder = corexp.getInput("folder");
   Context.ProcessJson = corexp.getInput("processJson") === "true";
   Context.TrimFiles = corexp.getInput("trimFiles") === "true";
+  Context.OutputFile = corexp.getInput("OutputFile") ?? "";
+
+  //If Context output empty then fill it
+  if (Context.OutputFile === "") {
+    Context.OutputFile = GetSafeFilepath(path.join(Context.Folder, ".."), "world", "mcworld");
+  }
 
   if (fs.existsSync(Context.Folder)) {
     Process(Context);
   } else {
-    throw { message: "Couldnt not find folder: " + Context.Folder };
+    throw { message: "Couldn't not find folder: " + Context.Folder };
   }
 } catch (error) {
   let message: string;
