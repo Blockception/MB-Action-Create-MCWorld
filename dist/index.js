@@ -198,6 +198,7 @@ exports.getInput = getInput;
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function setOutput(name, value) {
+    process.stdout.write(os.EOL);
     command_1.issueCommand('set-output', { name }, value);
 }
 exports.setOutput = setOutput;
@@ -1701,53 +1702,58 @@ module.exports = function (/**String*/input, /** object */options) {
             });
         },
 
-		/**
-		 * Allows you to create a entry (file or directory) in the zip file.
-		 * If you want to create a directory the entryName must end in / and a null buffer should be provided.
-		 * Comment and attributes are optional
-		 *
-		 * @param {string} entryName
-		 * @param {Buffer | string} content - file content as buffer or utf8 coded string
-		 * @param {string} comment - file comment
-		 * @param {number | object} attr - number as unix file permissions, object as filesystem Stats object
-		 */
-		addFile: function (/**String*/entryName, /**Buffer*/content, /**String*/comment, /**Number*/attr) {
-			// prepare new entry
-			var entry = new ZipEntry();
-			entry.entryName = entryName;
-			entry.comment = comment || "";
+        /**
+         * Allows you to create a entry (file or directory) in the zip file.
+         * If you want to create a directory the entryName must end in / and a null buffer should be provided.
+         * Comment and attributes are optional
+         *
+         * @param {string} entryName
+         * @param {Buffer | string} content - file content as buffer or utf8 coded string
+         * @param {string} comment - file comment
+         * @param {number | object} attr - number as unix file permissions, object as filesystem Stats object
+         */
+        addFile: function (/**String*/ entryName, /**Buffer*/ content, /**String*/ comment, /**Number*/ attr) {
+            let entry = getEntry(entryName);
+            const update = entry != null;
 
-			var isStat = ('object' === typeof attr) && (attr instanceof fs.Stats);
+            // prepare new entry
+            if (!update){
+                entry = new ZipEntry();
+                entry.entryName = entryName;
+            }
+            entry.comment = comment || "";
 
-			// last modification time from file stats
-			if (isStat){
-				entry.header.time = attr.mtime;
-			}
+            const isStat = ('object' === typeof attr) && (attr instanceof fs.Stats);
 
-			// Set file attribute
-			var fileattr = (entry.isDirectory) ? 0x10 : 0;  // (MS-DOS directory flag)
+            // last modification time from file stats
+            if (isStat){
+                entry.header.time = attr.mtime;
+            }
 
-			// extended attributes field for Unix
-			if('win32' !== process.platform){
-				// set file type either S_IFDIR / S_IFREG
-				var unix = (entry.isDirectory) ? 0x4000 : 0x8000;
+            // Set file attribute
+            var fileattr = (entry.isDirectory) ? 0x10 : 0;  // (MS-DOS directory flag)
 
-				if (isStat) { 										// File attributes from file stats
-					unix |= (0xfff & attr.mode);
-				}else if ('number' === typeof attr){ 				// attr from given attr values
-					unix |= (0xfff & attr);
-				}else{												// Default values:
-					unix |= (entry.isDirectory) ? 0o755 : 0o644;  	// permissions (drwxr-xr-x) or (-r-wr--r--)
-				}
+            // extended attributes field for Unix
+            if('win32' !== process.platform){
+                // set file type either S_IFDIR / S_IFREG
+                let unix = (entry.isDirectory) ? 0x4000 : 0x8000;
 
-				fileattr = (fileattr | (unix << 16)) >>> 0;			// add attributes
-			}
+                if (isStat) {                                       // File attributes from file stats
+                    unix |= (0xfff & attr.mode);
+                }else if ('number' === typeof attr){                // attr from given attr values
+                    unix |= (0xfff & attr);
+                }else{                                              // Default values:
+                    unix |= (entry.isDirectory) ? 0o755 : 0o644;    // permissions (drwxr-xr-x) or (-r-wr--r--)
+                }
 
-			entry.attr = fileattr;
+                fileattr = (fileattr | (unix << 16)) >>> 0;         // add attributes
+            }
 
-			entry.setData(content);
-			_zip.setEntry(entry);
-		},
+            entry.attr = fileattr;
+
+            entry.setData(content);
+            if (!update) _zip.setEntry(entry);
+        },
 
 		/**
 		 * Returns an array of ZipEntry objects representing the files and folders inside the archive
@@ -3053,7 +3059,7 @@ module.exports = (function() {
 
         crc32 : function(buf) {
             if (typeof buf === 'string') {
-                buf = Buffer.alloc(buf.length, buf);
+                buf = Buffer.from(buf);
             }
             var b = Buffer.alloc(4);
             if (!crcTable.length) {
@@ -16095,7 +16101,7 @@ const util = __nccwpck_require__(1669);
 const braces = __nccwpck_require__(7600);
 const picomatch = __nccwpck_require__(8588);
 const utils = __nccwpck_require__(9521);
-const isEmptyString = val => typeof val === 'string' && (val === '' || val === './');
+const isEmptyString = val => val === '' || val === './';
 
 /**
  * Returns an array of strings that match one or more glob patterns.
@@ -16107,9 +16113,9 @@ const isEmptyString = val => typeof val === 'string' && (val === '' || val === '
  * console.log(mm(['a.js', 'a.txt'], ['*.js']));
  * //=> [ 'a.js' ]
  * ```
- * @param {String|Array<string>} list List of strings to match.
- * @param {String|Array<string>} patterns One or more glob patterns to use for matching.
- * @param {Object} options See available [options](#options)
+ * @param {String|Array<string>} `list` List of strings to match.
+ * @param {String|Array<string>} `patterns` One or more glob patterns to use for matching.
+ * @param {Object} `options` See available [options](#options)
  * @return {Array} Returns an array of matches
  * @summary false
  * @api public
@@ -16204,9 +16210,9 @@ micromatch.matcher = (pattern, options) => picomatch(pattern, options);
  * console.log(mm.isMatch('a.a', ['b.*', '*.a'])); //=> true
  * console.log(mm.isMatch('a.a', 'b.*')); //=> false
  * ```
- * @param {String} str The string to test.
- * @param {String|Array} patterns One or more glob patterns to use for matching.
- * @param {Object} [options] See available [options](#options).
+ * @param {String} `str` The string to test.
+ * @param {String|Array} `patterns` One or more glob patterns to use for matching.
+ * @param {Object} `[options]` See available [options](#options).
  * @return {Boolean} Returns true if any patterns match `str`
  * @api public
  */
@@ -16272,7 +16278,7 @@ micromatch.not = (list, patterns, options = {}) => {
  * @param {String} `str` The string to match.
  * @param {String|Array} `patterns` Glob pattern to use for matching.
  * @param {Object} `options` See available [options](#options) for changing how matches are performed
- * @return {Boolean} Returns true if the patter matches any part of `str`.
+ * @return {Boolean} Returns true if any of the patterns matches any part of `str`.
  * @api public
  */
 
@@ -16343,7 +16349,7 @@ micromatch.matchKeys = (obj, patterns, options) => {
  * @param {String|Array} `list` The string or array of strings to test. Returns as soon as the first match is found.
  * @param {String|Array} `patterns` One or more glob patterns to use for matching.
  * @param {Object} `options` See available [options](#options) for changing how matches are performed
- * @return {Boolean} Returns true if any patterns match `str`
+ * @return {Boolean} Returns true if any `patterns` matches any of the strings in `list`
  * @api public
  */
 
@@ -16379,7 +16385,7 @@ micromatch.some = (list, patterns, options) => {
  * @param {String|Array} `list` The string or array of strings to test.
  * @param {String|Array} `patterns` One or more glob patterns to use for matching.
  * @param {Object} `options` See available [options](#options) for changing how matches are performed
- * @return {Boolean} Returns true if any patterns match `str`
+ * @return {Boolean} Returns true if all `patterns` matches all of the strings in `list`
  * @api public
  */
 
@@ -16445,7 +16451,7 @@ micromatch.all = (str, patterns, options) => {
  * @param {String} `glob` Glob pattern to use for matching.
  * @param {String} `input` String to match
  * @param {Object} `options` See available [options](#options) for changing how matches are performed
- * @return {Boolean} Returns an array of captures if the input matches the glob pattern, otherwise `null`.
+ * @return {Array|null} Returns an array of captures if the input matches the glob pattern, otherwise `null`.
  * @api public
  */
 
@@ -17011,7 +17017,7 @@ const parse = (input, options) => {
         output = token.close = `)$))${extglobStar}`;
       }
 
-      if (token.prev.type === 'bos' && eos()) {
+      if (token.prev.type === 'bos') {
         state.negatedExtglob = true;
       }
     }
@@ -18428,13 +18434,15 @@ const scan = (input, options) => {
           isBracket = token.isBracket = true;
           isGlob = token.isGlob = true;
           finished = true;
-
-          if (scanToEnd === true) {
-            continue;
-          }
           break;
         }
       }
+
+      if (scanToEnd === true) {
+        continue;
+      }
+
+      break;
     }
 
     if (opts.nonegate !== true && code === CHAR_EXCLAMATION_MARK && index === start) {
@@ -18661,7 +18669,7 @@ exports.wrapOutput = (input, state = {}, options = {}) => {
 let promise
 
 module.exports = typeof queueMicrotask === 'function'
-  ? queueMicrotask.bind(globalThis)
+  ? queueMicrotask.bind(typeof window !== 'undefined' ? window : global)
   // reuse resolved promise, and allocate it lazily
   : cb => (promise || (promise = Promise.resolve()))
     .then(cb)
