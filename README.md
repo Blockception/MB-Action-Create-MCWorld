@@ -63,7 +63,7 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
-      - uses: Blockception/MB-Action-Create-MCWorld@v1.2
+      - uses: Blockception/MB-Action-Create-MCWorld@v1.2.1
         id: create_mcworld
         with:
           # Path to the folder, assume ${{github.workspace}} leads to root of the repo
