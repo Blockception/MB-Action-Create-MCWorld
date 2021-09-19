@@ -6,7 +6,10 @@
   "scripts": {
     "build": "tsc -b && ncc build",
     "watch": "tsc -w",
-    "test": "npx jest --runInBand --detectOpenHandles --colors --verbose --reporters=default"
+    "test": "npx jest --runInBand --detectOpenHandles --colors --verbose --reporters=default",
+    "preversion": "",
+    "postversion": "git push && git push --tags",
+    "version": "git add -A src"
   },
   "repository": {
     "type": "git",
