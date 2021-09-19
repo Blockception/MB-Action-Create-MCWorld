@@ -1,5 +1,8 @@
 # Minecraft Bedrock Action: Create MCWorld
 
+[![tagged-release](https://github.com/Blockception/MB-Action-Create-MCWorld/actions/workflows/tagged-release.yml/badge.svg)](https://github.com/Blockception/MB-Action-Create-MCWorld/actions/workflows/tagged-release.yml)
+[![npm-unit-test](https://github.com/Blockception/MB-Action-Create-MCWorld/actions/workflows/npm-test.yml/badge.svg)](https://github.com/Blockception/MB-Action-Create-MCWorld/actions/workflows/npm-test.yml)
+
 - [Minecraft Bedrock Action: Create MCWorld](#minecraft-bedrock-action-create-mcworld)
   - [Actions](#actions)
   - [Inputs](#inputs)
