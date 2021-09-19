@@ -7,7 +7,7 @@
     "build": "tsc -b && npx ncc build",
     "watch": "tsc -w",
     "test": "npx jest --runInBand --detectOpenHandles --colors --verbose --reporters=default",
-    "preversion": "",
+    "preversion": "tsc -b && npx ncc build && git add -A dist && git commit -m \"auto: Generated\"",
     "postversion": "git push && git push --tags",
     "version": "git add -A source"
   },
