@@ -18,6 +18,8 @@ jobs:
           node-version: 14
       - name: Build
         run: npm ci
+      - run: npm install
+      - run: npm update
       - run: npm run build
       - name: Test
         run: npm test
