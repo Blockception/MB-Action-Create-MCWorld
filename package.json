@@ -9,7 +9,7 @@
     "test": "npx jest --runInBand --detectOpenHandles --colors --verbose --reporters=default",
     "preversion": "",
     "postversion": "git push && git push --tags",
-    "version": "git add -A src"
+    "version": "git add -A source"
   },
   "repository": {
     "type": "git",
