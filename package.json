@@ -44,7 +44,7 @@
   "dependencies": {
     "@actions/core": "^1.6.0",
     "@types/archiver": "^5.1.1",
-    "adm-zip": "^0.5.7",
+    "adm-zip": "^0.5.9",
     "comment-json": "^4.1.1",
     "fast-glob": "^3.2.7"
   }
