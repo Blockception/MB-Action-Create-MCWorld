@@ -32,7 +32,7 @@
   "homepage": "https://github.com/Blockception/MB-Action-Create-MCWorld#readme",
   "devDependencies": {
     "@types/adm-zip": "^0.4.34",
-    "@types/jest": "^27.0.2",
+    "@types/jest": "^27.0.3",
     "@types/node": "^16.10.2",
     "jest": "^27.4.3",
     "ncc": "^0.3.6",
