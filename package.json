@@ -46,6 +46,6 @@
     "@types/archiver": "^5.3.1",
     "adm-zip": "^0.5.9",
     "comment-json": "^4.2.3",
-    "fast-glob": "^3.2.11"
+    "fast-glob": "^3.2.12"
   }
 }
