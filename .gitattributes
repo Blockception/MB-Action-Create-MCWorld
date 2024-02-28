@@ -1,1 +1,4 @@
 .ps1 linguist-detectable=false
+
+# Mark dist as auto-generated
+dist/* linguist-generated

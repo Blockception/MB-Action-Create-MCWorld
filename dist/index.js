@@ -16752,11 +16752,11 @@ const IS_WINDOWS_PLATFORM = os.platform() === 'win32';
 const LEADING_DOT_SEGMENT_CHARACTERS_COUNT = 2; // ./ or .\\
 /**
  * All non-escaped special characters.
- * Posix: ()*?[\]{|}, !+@ before (, ! at the beginning, \\ before non-special characters.
- * Windows: (){}, !+@ before (, ! at the beginning.
+ * Posix: ()*?[]{|}, !+@ before (, ! at the beginning, \\ before non-special characters.
+ * Windows: (){}[], !+@ before (, ! at the beginning.
  */
 const POSIX_UNESCAPED_GLOB_SYMBOLS_RE = /(\\?)([()*?[\]{|}]|^!|[!+@](?=\()|\\(?![!()*+?@[\]{|}]))/g;
-const WINDOWS_UNESCAPED_GLOB_SYMBOLS_RE = /(\\?)([(){}]|^!|[!+@](?=\())/g;
+const WINDOWS_UNESCAPED_GLOB_SYMBOLS_RE = /(\\?)([()[\]{}]|^!|[!+@](?=\())/g;
 /**
  * The device path (\\.\ or \\?\).
  * https://learn.microsoft.com/en-us/dotnet/standard/io/file-path-formats#dos-device-paths
@@ -16767,7 +16767,7 @@ const DOS_DEVICE_PATH_RE = /^\\\\([.?])/;
  * Windows: !()+@{}
  * https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file#naming-conventions
  */
-const WINDOWS_BACKSLASHES_RE = /\\(?![!()+@{}])/g;
+const WINDOWS_BACKSLASHES_RE = /\\(?![!()+@[\]{}])/g;
 /**
  * Designed to work only with simple paths: `dir\\file`.
  */
@@ -16955,7 +16955,7 @@ function expandPatternsWithBraceExpansion(patterns) {
 }
 exports.expandPatternsWithBraceExpansion = expandPatternsWithBraceExpansion;
 function expandBraceExpansion(pattern) {
-    const patterns = micromatch.braces(pattern, { expand: true, nodupes: true });
+    const patterns = micromatch.braces(pattern, { expand: true, nodupes: true, keepEscaping: true });
     /**
      * Sort the patterns by length so that the same depth patterns are processed side by side.
      * `a/{b,}/{c,}/*` – `['a///*', 'a/b//*', 'a//c/*', 'a/b/c/*']`

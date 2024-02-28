@@ -10,11 +10,11 @@ inputs:
   processJson:
     description: Whether or not to format json and minify json
     required: false
-    default: true
+    default: "true"
   trimFiles:
     description: Whether or not to remove unwanted files
     required: false
-    default: true
+    default: "true"
   outputFile:
     description: "Defaults to the folder above the specified source folder with file name: word.mcworld, but this parameter can be overwritten."
     required: false
@@ -24,5 +24,5 @@ outputs:
   worldFilepath:
     description: "The outputted mcworld filepath"
 runs:
-  using: "node12"
+  using: "node20"
   main: "dist/index.js"
