@@ -47,7 +47,7 @@
   },
   "dependencies": {
     "@actions/core": "^1.10.1",
-    "@types/archiver": "^6.0.2",
+    "@types/archiver": "^6.0.3",
     "@vercel/ncc": "^0.38.1",
     "adm-zip": "^0.5.16",
     "comment-json": "^4.2.5",
