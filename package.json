@@ -1,6 +1,6 @@
 {
   "name": "mb-action-create-mcworld",
-  "version": "1.20.71-0",
+  "version": "1.21.44-0",
   "description": "The github action that will create a mcworld in a given respository",
   "main": "out/source/action.js",
   "scripts": {
