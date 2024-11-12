@@ -35,14 +35,14 @@
     "@types/adm-zip": "^0.5.5",
     "@types/eslint__js": "^8.42.3",
     "@types/jest": "^29.5.14",
-    "@types/node": "^22.5.4",
+    "@types/node": "^22.9.0",
     "eslint": "^9.14.0",
     "eslint-plugin-jest": "^28.9.0",
     "jest": "^29.7.0",
     "ts-jest": "^29.2.5",
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.4",
+    "typescript": "^5.6.3",
     "typescript-eslint": "^8.13.0"
   },
   "dependencies": {
