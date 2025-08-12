@@ -35,7 +35,7 @@
     "@types/adm-zip": "^0.5.7",
     "@types/eslint__js": "^9.14.0",
     "@types/jest": "^30.0.0",
-    "@types/node": "^24.2.0",
+    "@types/node": "^24.2.1",
     "eslint": "^9.33.0",
     "eslint-plugin-jest": "^29.0.1",
     "jest": "^30.0.5",
