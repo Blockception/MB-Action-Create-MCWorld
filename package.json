@@ -46,7 +46,7 @@
     "typescript-eslint": "^8.48.1"
   },
   "dependencies": {
-    "@actions/core": "^1.10.1",
+    "@actions/core": "^2.0.1",
     "@types/archiver": "^7.0.0",
     "@vercel/ncc": "^0.38.4",
     "adm-zip": "^0.5.16",
