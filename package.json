@@ -50,7 +50,7 @@
     "@types/archiver": "^7.0.0",
     "@vercel/ncc": "^0.38.4",
     "adm-zip": "^0.5.17",
-    "comment-json": "^4.6.2",
+    "comment-json": "^5.0.0",
     "fast-glob": "^3.3.3"
   }
 }
